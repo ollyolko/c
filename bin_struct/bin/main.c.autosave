@@ -91,7 +91,7 @@ int main(){
     return 0;
 }
 */
-
+/* task 1
 #include <stdio.h>
 
 struct Book {
