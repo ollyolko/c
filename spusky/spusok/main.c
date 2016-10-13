@@ -147,3 +147,124 @@ int main()
 
 
 
+#include <stdio.h>
+#include <string.h>
+#include <windows.h>
+
+//джерело даних input1.txt
+
+
+//структура даних
+struct Node{
+    char word[40]; //область даних
+    int length;
+    struct Node* next; // адреса наступного вузла
+};
+
+typedef struct Node*PNode;
+
+// створення нового вузла
+PNode CreateNode(FILE* fp){
+    PNode NewNode =(PNode)calloc(1,sizeof(struct Node)); // покажчик на новий вузол
+    fscanf(fp,"%s",NewNode->word); // записати у возол слово
+    NewNode->length = strlen(NewNode->word); // лічильник слів = 1
+    NewNode->next = NULL; // наступного вузла - поки немає
+    return NewNode; // результат функції – адреса створеного вузла
+}
+
+
+int main(){
+    //голова списку
+    PNode Head=NULL, p;
+    FILE *fp=fopen("input1.txt","r");
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    //створення списку
+    Head=CreateNode(fp);
+    p=Head;
+
+    //створення списку
+    while(p=CreateNode(fp)){
+        if(Head==NULL){
+            Head=p;
+        } else {
+            AddLast(Head,p);
+        }
+        p=Head;
+}
+    // додавання вузла після заданого
+    void AddAfter (PNode p, PNode NewNode){
+        NewNode->next = p->next;
+        p->next = NewNode;
+    }
+
+    // додавання вузла в кінець спису
+    void AddLast(PNode Head, PNode NewNode){
+        while (q->next!=NULL) q = q->next; // шукаємо останній елемент
+            AddAfter(q, NewNode);	// додаємо новий після нього
+    }
+
+    /*//перегляд списку
+    if(p!=NULL)
+    do {
+        printf("%s %d",p->word,p->length);
+        if(p->next!=NULL){
+            p=p->next;
+        } else {
+            break;
+        }
+    } while(1);
+    */
+
+    // 2 варіант
+        while(p!=NULL){
+        printf("%s %d",p->word,p->length);
+        p=p->next;
+    }
+    getchar();
+
+    // створення нового вузла
+    PNode NewNode.
+    {
+        PNode NewNode =(PNode)calloc(1,sizeof(struct Node)); // покажчик на новий вузол
+        strcpy(NewNode->word, NewWord); // записати у возол слово
+        NewNode->count = 1; // лічильник слів = 1
+        NewNode->next = NULL; // наступного вузла - поки немає
+        return NewNode; // результат функції – адреса створеного вузла
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
