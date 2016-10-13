@@ -91,11 +91,46 @@ int main(){
     return 0;
 }
 */
+/* task 1
+#include <stdio.h>
+
+struct Book {
+    char aurhor[40];
+    char title[80];
+    int year;
+    int pages;
+};
+
+int main(){
+
+    struct Book b;
+    int n=0;
+    int num=0;
+
+//    n=sizeof(struct Book);
+//    printf("%d", n);
+
+    FILE *in;
+    in=fopen("library.dat", "rb");
+    if(!in){
+        printf("error open file");
+    }
 
 
+    for(num=0; num<6;num++){
+    fseek(in,num*sizeof(struct Book), SEEK_SET);
+    n=fread(&b,sizeof(struct Book),1,in);
+    if(n==0){
+        printf("error read file");
+    }
 
+    //printf("n=%d\n",n);
+    printf("\n%s\n%s\n%d\n%d\n",b.aurhor,b.title,b.year,b.pages);
+    }
+    fclose(in);
 
-
+    return 0;
+}
 
 
 
@@ -146,7 +181,74 @@ int main(){
 переконайтеся в коректності перенесення з іншого файлу даних.
 */
 
+#include <stdio.h>
 
+struct Book {
+    char aurhor[40];
+    char title[80];
+    int year;
+    int pages;
+};
+
+int main(){
+
+    struct Book b[6];
+    int n=0;
+    int i=0;
+
+//    n=sizeof(struct Book);
+//    printf("%d", n);
+
+    FILE *in;
+    in=fopen("library.dat", "rb");
+    if(!in){
+        printf("error open file");
+    }
+
+    n=fread(&b[0],sizeof(struct Book),6,in);
+
+    if(n==0){
+        printf("error read file or empty file");
+    }
+
+   for(i=0;i<n;i++){
+        printf("\n%s\n%s\n%d\n%d\n",b[i].aurhor,b[i].title,b[i].year,b[i].pages);
+        printf("change numer pages olease:");
+        scanf("%d",& b[i].pages);
+   }
+//   // print array
+//   for(i=0;i<n;i++){
+//        printf("array -\n%s\n%s\n%d\n%d\n",b[i].aurhor,b[i].title,b[i].year,b[i].pages);
+//   }
+    fclose(in);
+
+    in=fopen("library_out.dat","w");
+    if(!in){
+        printf("error open library_out.dat");
+    }
+// printf("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!n=%d\n",n);
+//   fwrite(b,sizeof(struct Book),n,in);
+    for(i=0;i<n;i++){
+        fwrite(b,sizeof(struct Book),n,in);
+    }
+   fclose(in);
+
+   //------------------ output file
+    in=fopen("library_out.dat", "rb");
+    if(!in){
+        printf("error open file");
+    }
+     n=fread(&b[0],sizeof(struct Book),6,in);
+     if(n==0){
+         printf("error read file or empty file");
+     }
+
+    for(i=0;i<n;i++){
+         printf("\n%s\n%s\n%d\n%d\n",b[i].aurhor,b[i].title,b[i].year,b[i].pages);
+    }
+
+     return 0;
+}
 /*
 // запис і читання з бінарного файлу масиву структур
 #include <stdio.h>
